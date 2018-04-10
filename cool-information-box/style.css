@@ -1,0 +1,18 @@
+html {
+  font-family: sans-serif;
+}
+
+/* Your CSS below here */
+
+p {
+  margin: 0 auto;
+  padding: 1rem;
+  width: 200px;
+  height: 100%;
+  font-size: 1.1rem;
+  background-color: steelblue;
+  color: steelblue;
+  text-shadow: 2px 2px 2px black;
+  border: black solid 1px;
+  border-radius: 5px;
+}
