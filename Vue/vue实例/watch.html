@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+</head>
+<body>
+    <div id="watch">
+        <p>
+            Ask a question:
+            <input v-model="question">
+        </p>
+        <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+            aaa
+        </div>
+        <div v-bind:class="classObject">
+            bbbbb
+        </div>
+        <p>Answer: {{ answer }}</p>
+    </div>
+
+    <script>
+        var watchVm = new Vue({
+            el: "#watch",
+            data: {
+                question: "",
+                answer: "请输入你的问题",
+                isActive: true,
+                hasError: true
+                // classObject: {
+                //     active: true,
+                //     aaaclass: true
+                // }
+            },
+            computed: {
+                classObject: function () {
+                    return { active: this.isActive, bbclass: this.hasError }
+                }
+            },
+            watch: {
+                question: function (newQuestion, oldQuestion) {
+                    this.answer = "waiting...";
+                    this.getAnswer();
+                }
+            },
+            methods: {
+                getAnswer: _.debounce(
+                    function () {
+                        if (this.question.indexOf("?") === -1) {
+                            this.answer = "没有问题，我该怎么回答呢？";
+                        } else {
+                            this.answer = "thinking...";
+                            var question = this;
+                            console.log(this);
+                            axios.get("https://yesno.wtf/api")
+                                .then(
+                                    function (response) {
+                                        // console.log(response);
+                                        console.log(this);
+                                        question.answer = _.capitalize(response.data.answer)
+                                    }
+                                )
+                                .catch(
+                                    function (error) {
+                                        question.answer = "Error! 获取不到答案哦！" + error
+                                    }
+                                )
+                        }
+                    },
+                    500
+                )
+            }
+
+        })
+    </script>
+</body>
+</html>
