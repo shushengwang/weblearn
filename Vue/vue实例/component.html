@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0 auto;
+            max-width: 80%;
+            align-content: center;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>vue 组件</title>
+</head>
+<body>
+    <div id="example">
+        <my-component></my-component>
+        <child-component></child-component>
+    </div>
+    <div id="example-2">
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+    </div>
+    <div id="example-3">
+        <children message="hello word !"></children>
+    </div>
+    <div id="example-prop">
+        <input v-model="parentMessage">
+        <br>
+        <child-prop v-bind:my-message="parentMessage"></child-prop>
+    </div>
+    <div id="counter-example">
+        <p>{{ total }}</p>
+        <button-counter v-on:increment="incermentTotal"></button-counter>
+        <button-counter v-on:increment="incermentTotal"></button-counter>
+    </div>
+    <div id="message-event-example">
+        <p v-for="message in messages">{{ message }}</p>
+        <button-message v-on:sendmessage="handleMessages"></button-message>
+    </div>
+    <script src="./component.js"></script>
+</body>
+</html>
