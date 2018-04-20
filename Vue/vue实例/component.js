@@ -106,20 +106,38 @@ var vm = new Vue({
 });
 
 Vue.component("currency-input", {
-    template: '\
+    template: "\
     <span>\
       $\
       <input\
-        ref="input"\
-        v-bind:value="value"\
-        v-on:input="updateValue($event.target.value)"\
+        ref='input'\
+        v-bind:value='value'\
+        v-on:input='updateValue($event.target.value)'\
       >\
     </span>\
-    ',
-    props: ['value'],
+    ",
+    props: ["value"],
     methods: {
         updateValue: function (value) {
-            
+            console.log("index == " + value.indexOf("."));
+            var result = value.trim().slice(
+                0,
+                value.indexOf(".") === -1 ? value.length : value.indexOf(".") + 3
+            );
+            console.log("result == " + result);
+            if (result !== value) {
+                this.$refs.input.value = result;
+            }
+            this.$emit("input", Number(result))
         }
     }
 });
+
+new Vue({
+    el: "#currency-input-example",
+    data: {
+        price: ""
+    }
+});
+
+

@@ -39,6 +39,11 @@
         <p v-for="message in messages">{{ message }}</p>
         <button-message v-on:sendmessage="handleMessages"></button-message>
     </div>
+    <div id="currency-input-example">
+        <currency-input v-model="price"></currency-input>
+    </div>
+    
+
     <script src="./component.js"></script>
 </body>
 </html>
