@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="transition.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>transition</title>
+</head>
+<body>
+<div id="demo">
+    <button v-on:click="show = !show">
+        Toggle
+    </button>
+    <transition name="fade">
+        <p v-if="show">hello</p>
+    </transition>
+</div>
+<div id="example-1">
+    <button @click="show = !show">
+        Toggle render
+    </button>
+    <transition name="slide-fade">
+        <p v-if="show">hello</p>
+    </transition>
+</div>
+<div id="example-2">
+    <button @click="show = !show">Toggle show</button>
+    <transition name="bounce">
+        <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+    </transition>
+</div>
+<script src="transition.js"></script>
+
+</body>
+</html>
